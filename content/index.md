@@ -8,6 +8,84 @@ The core insight — the **penumbra hypothesis** — is that resolving light fro
 
 The technique is geometry-agnostic (constant cost regardless of scene complexity) and produces noiseless results in 2D. Extending RC to 3D remains an open problem — see [[tags/variant|variants]].
 
+<style>
+#rc-demo { display:flex; flex-direction:column; width:fit-content; position:relative; z-index:10; }
+#rc-demo button { border:none; cursor:pointer; }
+#rc-demo .color { max-width:20px; width:20px; height:20px; position:relative; }
+#rc-demo canvas { image-rendering:auto; width:fit-content; display:block; }
+#rc-demo .iconButton { margin-left:-1px; padding:0; width:24px; height:24px; padding-top:4px; }
+#rc-demo .erase { position:absolute; top:2px; left:1px; }
+#rc-demo .arrow { border:none; position:absolute; top:0; right:-17px; left:auto; cursor:auto; color:white; transform:rotate(180deg); }
+#rc-demo .hidden { display:none; }
+#rc-canvas > div { gap:8px !important; }
+#rc-demo label, #rc-demo summary, #rc-demo span, #rc-demo div { color: var(--darkgray); }
+#rc-demo .slider { flex: 1; }
+#rc-demo label { display: flex; align-items: center; gap: 6px; line-height: 1.8; }
+#rc-demo-controls {
+  font-size: 0.85rem;
+  margin-top: 0;
+  padding: 6px 10px;
+  background: var(--lightgray);
+  border-radius: 0 0 6px 6px;
+  box-sizing: border-box;
+}
+#rc-demo-controls-bottom { display: flex; align-items: baseline; justify-content: space-between; margin-top: 2px; }
+#rc-demo details summary { cursor: pointer; font-size: 0.8rem; color: var(--gray); }
+#rc-demo details summary:hover { color: var(--secondary); }
+#additional-controls-container > div { margin-top: 1px; }
+</style>
+
+<div id="rc-demo">
+<div id="rc-canvas"></div>
+<div id="rc-demo-controls">
+<div id="outer-container">
+<label style="display:flex; align-items:center; gap:6px; cursor:pointer">
+<span>2D SRGB Falloff</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="enable-srgb" checked>
+</label>
+</div>
+<div id="rc-demo-controls-bottom">
+<details style="cursor:pointer">
+<summary>Additional Controls</summary>
+<label style="display:none; align-items:center; gap:6px; cursor:pointer">
+<span>Bilinear Fix</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="bilinear-fix">
+</label>
+<label style="display:flex; align-items:center; gap:6px; cursor:pointer">
+<span>Disable Mips</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="disable-mips">
+</label>
+<label style="display:flex; align-items:center; gap:6px; cursor:pointer">
+<span>Non-Linear Accumulation</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="nonlinear-accumulation">
+</label>
+<label style="display:flex; align-items:center; gap:6px; cursor:pointer">
+<span>Naive GI Noise</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="add-noise">
+</label>
+<label style="display:flex; align-items:center; gap:6px; cursor:pointer">
+<span>Reduce Demand (Calculate over 2 frames)</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="reduce-demand">
+</label>
+<label style="display:none; align-items:center; gap:6px; cursor:pointer">
+<span>Ringing Fix</span> <input style="margin:0;appearance:auto;width:auto;height:auto;position:static;transform:none;cursor:pointer" type="checkbox" id="ringing-fix">
+</label>
+<div id="additional-controls-container"></div>
+<div style="display:flex; align-items:center; gap:8px">
+Sun Angle
+<input id="rc-sun-angle-slider" class="slider" type="range" min="0" max="6.2" step="0.1" value="2.0">
+</div>
+</details>
+</div>
+</div>
+</div>
+
+<script src="/static/rc-demo/rc.js"></script>
+<script>
+requestAnimationFrame(() => {
+  const c = document.querySelector('#rc-canvas-canvas-container');
+  const ctrl = document.querySelector('#rc-demo-controls');
+  if (!c || !ctrl) return;
+  const sync = () => { ctrl.style.width = c.offsetWidth + 'px'; };
+  new ResizeObserver(sync).observe(c);
+  sync();
+});
+</script>
+
 ## Start Here
 
 1. [[simondev|SimonDev's video]] — accessible introduction
