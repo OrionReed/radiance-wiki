@@ -2,7 +2,7 @@
 title: Radiance Cascades
 ---
 
-Radiance Cascades is an approach to real-time [global illumination](https://en.wikipedia.org/wiki/Global_illumination), created by **Alexander Sannikov** (Suslik) at [Grinding Gear Games](https://www.grindinggear.com/) for [Path of Exile 2](https://pathofexile2.com/). First presented at [[exilecon-2023|ExileCon 2023]].
+Radiance Cascades is an approach to real-time [global illumination](https://en.wikipedia.org/wiki/Global_illumination), created by **Alexander Sannikov** at [Grinding Gear Games](https://www.grindinggear.com/) for [Path of Exile 2](https://pathofexile2.com/). First presented at [[exilecon-2023|ExileCon 2023]]. It has since been extended and modified in a variety of ways by an active community of developers and researchers.
 
 The core insight — the **penumbra hypothesis** — is that resolving light from an object requires higher spatial resolution nearby and higher angular resolution far away. RC exploits this inverse relationship: each cascade level doubles the ray count while halving the probe density, and merging reconstructs a full radiance field cheaply.
 
