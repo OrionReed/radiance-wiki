@@ -1,0 +1,23 @@
+.github-edit {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--secondary);
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+}
