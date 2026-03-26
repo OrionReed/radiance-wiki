@@ -9,7 +9,7 @@ The core insight — the **penumbra hypothesis** — is that resolving light fro
 The technique is geometry-agnostic (constant cost regardless of scene complexity) and produces noiseless results in 2D. Extending RC to 3D remains an open problem — see [[tags/variant|variants]].
 
 <style>
-#rc-demo { display:flex; flex-direction:column; width:fit-content; position:relative; z-index:10; }
+#rc-demo { display:flex; flex-direction:column; width:fit-content; position:relative; z-index:10; margin:0 auto; }
 #rc-demo button { border:none; cursor:pointer; }
 #rc-demo .color { max-width:20px; width:20px; height:20px; position:relative; }
 #rc-demo canvas { image-rendering:auto; width:fit-content; display:block; }
